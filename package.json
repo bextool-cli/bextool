@@ -1,6 +1,6 @@
 {
   "name": "bextool",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "CLI for scaffolding apps, extensions, services, CLIs, and developer tooling",
   "bin": {
     "bextool": "src/index.js"
@@ -15,7 +15,7 @@
     "express",
     "electron"
   ],
-  "homepage": "https://github.com/bextool-cli/bextool#readme",
+  "homepage": "https://www.bextool.tech/",
   "bugs": {
     "url": "https://github.com/bextool-cli/bextool/issues"
   },
@@ -33,6 +33,7 @@
   "files": [
     "src",
     "templates",
+    "public",
     "README.md",
     "LICENSE"
   ],
