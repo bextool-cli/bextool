@@ -1,0 +1,12 @@
+import express from "express";
+
+const app = express();
+const port = Number(process.env.PORT || {{apiPort}});
+
+app.get("/health", (_req, res) => {
+  res.json({ status: "ok", service: "{{projectName}}" });
+});
+
+app.listen(port, () => {
+  console.log(`API listening on ${port}`);
+});

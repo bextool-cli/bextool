@@ -1,0 +1,16 @@
+import express from "express";
+
+const app = express();
+const port = Number(process.env.PORT || {{port}});
+
+app.get("/", (_req, res) => {
+  res.json({
+    name: "{{projectName}}",
+    description: "{{description}}",
+    status: "ok",
+  });
+});
+
+app.listen(port, () => {
+  console.log(`{{projectName}} listening on http://localhost:${port}`);
+});

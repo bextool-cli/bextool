@@ -1,0 +1,19 @@
+#!/usr/bin/env node
+
+import { Command } from "commander";
+
+const program = new Command();
+
+program
+  .name("{{binName}}")
+  .description("{{description}}")
+  .version("{{version}}");
+
+program
+  .command("hello <name>")
+  .description("Greet a teammate")
+  .action((name) => {
+    console.log(`Hello, ${name}! Welcome to {{projectName}}.`);
+  });
+
+program.parse();

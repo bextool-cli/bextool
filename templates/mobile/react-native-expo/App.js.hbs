@@ -1,0 +1,36 @@
+import { SafeAreaView, StatusBar, StyleSheet, Text, View } from "react-native";
+
+export default function App() {
+  return (
+    <SafeAreaView style={styles.safe}>
+      <StatusBar barStyle="dark-content" />
+      <View style={styles.card}>
+        <Text style={styles.title}>{{projectName}}</Text>
+        <Text style={styles.copy}>{{description}}</Text>
+      </View>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  safe: {
+    flex: 1,
+    backgroundColor: "#fff7ed",
+    justifyContent: "center",
+    padding: 24,
+  },
+  card: {
+    borderRadius: 24,
+    padding: 24,
+    backgroundColor: "#ffffff",
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: "700",
+    marginBottom: 12,
+  },
+  copy: {
+    fontSize: 16,
+    color: "#57534e",
+  },
+});

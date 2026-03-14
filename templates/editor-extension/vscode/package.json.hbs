@@ -1,0 +1,29 @@
+{
+  "name": "{{packageName}}",
+  "displayName": "{{projectName}}",
+  "description": "{{description}}",
+  "version": "{{version}}",
+  "publisher": "your-name",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "main": "./extension.js",
+  "activationEvents": [
+    "{{activationEvent}}"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "{{commandId}}",
+        "title": "{{projectName}}: Hello World"
+      }
+    ]
+  },
+  "scripts": {
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.90.0",
+    "vsce": "^2.15.0"
+  }
+}
