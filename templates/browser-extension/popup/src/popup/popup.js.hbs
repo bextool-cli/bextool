@@ -1,0 +1,7 @@
+document.getElementById("actionButton").addEventListener("click", async () => {
+  const status = document.getElementById("status");
+  status.textContent = "Button clicked";
+  const runtime = globalThis.browser ?? globalThis.chrome;
+  const response = await runtime.runtime.sendMessage({ action: "buttonClicked" });
+  status.textContent = response.status;
+});

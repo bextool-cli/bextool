@@ -1,0 +1,8 @@
+import { describe, expect, it } from "vitest";
+import { {{entryExport}} } from "../src/index";
+
+describe("{{entryExport}}", () => {
+  it("greets a user", () => {
+    expect({{entryExport}}("team")).toBe("Hello, team!");
+  });
+});

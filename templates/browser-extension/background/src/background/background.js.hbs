@@ -1,0 +1,11 @@
+const runtime = globalThis.browser ?? globalThis.chrome;
+
+runtime.runtime.onInstalled.addListener(() => {
+  console.log("{{projectName}} installed");
+});
+
+runtime.runtime.onMessage.addListener((request, _sender, sendResponse) => {
+  if (request.action === "buttonClicked") {
+    sendResponse({ status: "Message received in background" });
+  }
+});

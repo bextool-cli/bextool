@@ -1,0 +1,7 @@
+const runtime = globalThis.browser ?? globalThis.chrome;
+
+console.log("{{projectName}} content script ready");
+
+runtime.runtime.onMessage.addListener((request, _sender, sendResponse) => {
+  sendResponse({ status: `Content script received ${request.action}` });
+});

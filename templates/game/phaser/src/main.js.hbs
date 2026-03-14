@@ -1,0 +1,30 @@
+import Phaser from "phaser";
+
+class HelloScene extends Phaser.Scene {
+  constructor() {
+    super("hello-scene");
+  }
+
+  create() {
+    this.cameras.main.setBackgroundColor("#1f2937");
+    this.add.text(80, 120, "{{projectName}}", {
+      color: "#f9fafb",
+      fontSize: "32px",
+      fontFamily: "Arial",
+    });
+    this.add.text(80, 180, "Click to spawn stars", {
+      color: "#fdba74",
+      fontSize: "18px",
+    });
+    this.input.on("pointerdown", (pointer) => {
+      this.add.circle(pointer.x, pointer.y, 8, 0xfbbf24);
+    });
+  }
+}
+
+new Phaser.Game({
+  type: Phaser.AUTO,
+  width: 960,
+  height: 540,
+  scene: HelloScene,
+});
