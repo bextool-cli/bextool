@@ -1,6 +1,6 @@
 {
   "name": "bextool",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "CLI for scaffolding browser extension starter projects",
   "bin": {
     "bextool": "src/index.js"
@@ -14,13 +14,13 @@
     "extension",
     "manifest-v3"
   ],
-  "homepage": "https://github.com/Abhiraj35/bextool#readme",
+  "homepage": "https://github.com/bextool-cli/bextool#readme",
   "bugs": {
-    "url": "https://github.com/Abhiraj35/bextool/issues"
+    "url": "https://github.com/bextool-cli/bextool/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Abhiraj35/bextool.git"
+    "url": "git+https://github.com/bextool-cli/bextool.git"
   },
   "license": "ISC",
   "author": "Abhiraj (GitHub: Abhiraj35)",
