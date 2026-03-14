@@ -43,6 +43,8 @@ The generated extension includes:
 
 ## Local Development
 
+Repository: `https://github.com/bextool-cli/bextool`
+
 Run the CLI locally from this repository with:
 
 ```bash
