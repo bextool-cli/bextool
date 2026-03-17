@@ -3,6 +3,7 @@
 import * as p from "@clack/prompts";
 import fs from "fs-extra";
 import kleur from "kleur";
+import chalk from "chalk";
 import path from "path";
 import { execa } from "execa";
 import {
@@ -12,15 +13,9 @@ import {
 } from "./config/frameworks.js";
 
 const theme = {
-  primary(text) {
-    return kleur.bold().yellow(text);
-  },
-  soft(text) {
-    return kleur.cyan(text);
-  },
-  step(text) {
-    return kleur.bgWhite().black(text);
-  },
+  primaryDark: "#9a3412",
+  primary: "#f97316",
+  primarySoft: "#fdba74",
 };
 
 function handleCancel(value) {
@@ -33,7 +28,71 @@ function handleCancel(value) {
 }
 
 function sectionTitle(step, title) {
-  return `${theme.step(` ${step} `)} ${kleur.bold(theme.soft(title))}`;
+  return `${chalk.bgHex(theme.primaryDark).white(` ${step} `)} ${chalk.hex(theme.primarySoft).bold(title)}`;
+}
+
+function wrapText(text, width) {
+  if (!text) return [""];
+
+  const words = text.split(" ");
+  const lines = [];
+  let current = "";
+
+  for (const word of words) {
+    const next = current ? `${current} ${word}` : word;
+    if (next.length <= width) {
+      current = next;
+      continue;
+    }
+
+    if (current) lines.push(current);
+    current = word;
+  }
+
+  if (current) lines.push(current);
+  return lines;
+}
+
+function renderQuickGuideNote() {
+  const noteWidth = Math.max(32, Math.min(72, (process.stdout.columns ?? 100) - 14));
+  const rawLines = [
+    "Use arrow keys to move, space to select, and Ctrl+C to exit.",
+    "This wizard will generate the project and can optionally install dependencies.",
+    "",
+    "Here you go !",
+  ];
+
+  return rawLines
+    .flatMap((line) => (line ? wrapText(line, noteWidth) : [""]))
+    .join("\n");
+}
+
+function renderHeroBanner() {
+  const lines = [
+    "██████╗ ███████╗██╗  ██╗████████╗ ██████╗  ██████╗ ██╗     ",
+    "   ██╔══██╗██╔════╝╚██╗██╔╝╚══██╔══╝██╔═══██╗██╔═══██╗██║     ",
+    "   ██████╔╝█████╗   ╚███╔╝    ██║   ██║   ██║██║   ██║██║     ",
+    "   ██╔══██╗██╔══╝   ██╔██╗    ██║   ██║   ██║██║   ██║██║     ",
+    "   ██████╔╝███████╗██╔╝ ██╗   ██║   ╚██████╔╝╚██████╔╝███████╗",
+    "   ╚═════╝ ╚══════╝╚═╝  ╚═╝   ╚═╝    ╚═════╝  ╚═════╝ ╚══════╝",
+  ];
+
+  const palette = [theme.primaryDark, theme.primary, theme.primarySoft];
+
+  const gradient = lines
+    .map((line, index) => chalk.hex(palette[index % palette.length]).bold(line))
+    .join("\n");
+
+  const bannerWidth = Math.max(...lines.map((line) => line.length));
+  const sidePadding = Math.max(0, 0);
+  const subtitleLine = ` ${" ".repeat(sidePadding)}${" ".repeat(sidePadding)} `;
+
+  const divider = chalk.hex(theme.primarySoft)("─".repeat(bannerWidth));
+  const subtitle = chalk
+    .bgHex(theme.primaryDark)
+    .whiteBright.bold(subtitleLine.padEnd(bannerWidth, " "));
+
+  return `${gradient}\n${divider}\n${subtitle}`;
 }
 
 function slugifyProjectName(value) {
@@ -151,19 +210,15 @@ async function main() {
 
   p.intro(
     [
-      theme.primary("BEXTOOL"),
-      theme.soft("Scaffold apps, CLIs, extensions, services, and more from one wizard."),
+      renderHeroBanner(),
+      chalk.whiteBright.bold(
+        "Scaffold apps, extensions, and developer tooling from one guided flow.",
+      ),
     ].join("\n"),
   );
 
   try {
-    p.note(
-      [
-        "Use arrow keys to move, space to select, and Ctrl+C to exit.",
-        "Choose a category first, then a framework, then the options that matter for that starter.",
-      ].join("\n"),
-      "Quick Guide",
-    );
+    p.note(renderQuickGuideNote(), "Quick Guide");
 
     const category = handleCancel(
       await p.select({
@@ -306,7 +361,7 @@ async function main() {
       }
     }
 
-    p.outro(theme.primary(`${framework.name} scaffold ready.`));
+    p.outro(chalk.hex(theme.primary)(`${framework.name} scaffold ready.`));
 
     const nextSteps = [`cd ${projectName}`];
     if (framework.usesPackageManager && !installDependencies && packageManager) {
