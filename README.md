@@ -79,6 +79,8 @@ Run the CLI:
 bextool
 ```
 
+Scaffold apps, extensions, and developer tooling from one guided flow.
+
 The flow will:
 
 1. Ask which project category you want to create.
