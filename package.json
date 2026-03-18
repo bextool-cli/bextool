@@ -1,6 +1,6 @@
 {
   "name": "bextool",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "CLI for scaffolding apps, extensions, services, CLIs, and developer tooling",
   "bin": {
     "bextool": "src/index.js"
