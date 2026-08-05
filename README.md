@@ -192,3 +192,4 @@ This keeps the CLI maintainable while making future expansion straightforward.
 ## License
 
 ISC
+
